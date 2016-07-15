@@ -10,4 +10,20 @@
   	<servlet-name>welcome</servlet-name>
   	<url-pattern>/welcomeForm</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>addItem</servlet-name>
+  	<servlet-class>wb.store.admin.AddItem</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>addItem</servlet-name>
+  	<url-pattern>/addItem</url-pattern>
+  </servlet-mapping>
+  
+  <resource-ref>
+	<description>MySQL Datasource</description>
+	<res-ref-name>jdbc/store</res-ref-name>
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+  </resource-ref>
 </web-app>
