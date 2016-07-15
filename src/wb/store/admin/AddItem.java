@@ -24,14 +24,16 @@ public class AddItem extends HttpServlet{
 		String name = request.getParameter("item_name");
 		String description = request.getParameter("item_description");
 		String price = request.getParameter("item_price");
-		System.out.println(price);
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
 		
 		try {
 			//Get a connection to the database
-			Connection myConn = ds.getConnection();
+			myConn = ds.getConnection();
 			
 			// Prepare statement
-			PreparedStatement myStmt = myConn.prepareStatement("insert into items "
+			myStmt = myConn.prepareStatement("insert into items "
 					+ "(item_name, item_description, item_price) "
 					+ "values (?, ?, ?)");
 			
@@ -53,6 +55,9 @@ public class AddItem extends HttpServlet{
 			view.forward(request, response);
 			
 			e.printStackTrace();
+		} finally {
+			try { myStmt.close(); } catch (Exception e) {/* ignored */ }
+			try { myConn.close(); } catch (Exception e) {/* ignored */ }
 		}
 	}
 }

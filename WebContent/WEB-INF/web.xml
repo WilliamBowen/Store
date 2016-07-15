@@ -20,6 +20,15 @@
   	<url-pattern>/addItem</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>displayItems</servlet-name>
+  	<servlet-class>wb.store.servlet.DisplayItemsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>displayItems</servlet-name>
+  	<url-pattern>/display</url-pattern>
+  </servlet-mapping>
+  
   <resource-ref>
 	<description>MySQL Datasource</description>
 	<res-ref-name>jdbc/store</res-ref-name>

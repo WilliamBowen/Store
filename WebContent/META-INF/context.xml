@@ -15,8 +15,6 @@ driverClassName="com.mysql.jdbc.Driver"
 
 url="jdbc:mysql://localhost:3306/store"
 
-maxActive="15"
-
-maxIdle="3"/>
+/>
 
 </Context>
