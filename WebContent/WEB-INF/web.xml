@@ -13,7 +13,7 @@
   
   <servlet>
   	<servlet-name>addItem</servlet-name>
-  	<servlet-class>wb.store.admin.AddItem</servlet-class>
+  	<servlet-class>wb.store.servlet.AddItemServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>addItem</servlet-name>

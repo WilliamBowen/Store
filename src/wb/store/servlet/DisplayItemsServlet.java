@@ -1,7 +1,8 @@
 package wb.store.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -11,18 +12,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import wb.store.helper.DBMethods;
+import wb.store.helper.ItemService;
 import wb.store.model.Item;
 
 public class DisplayItemsServlet extends HttpServlet {
+
 	@Resource(name="jdbc/store")
 	private DataSource ds;
-	
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {
-		ArrayList<Item> items = DBMethods.getAllItems(ds);
-		request.setAttribute("items", items);
-		RequestDispatcher view = request.getRequestDispatcher("itemDisplay.jsp");
-		view.forward(request, response);
+		try {
+			ItemService is = new ItemService(ds);
+			List<Item> items = is.getItems();
+			request.setAttribute("items", items);
+			RequestDispatcher view = request.getRequestDispatcher("itemDisplay.jsp");
+			view.forward(request, response);
+		} catch (SQLException sqle){
+			sqle.printStackTrace();
+		}
+		
 	}
 }
