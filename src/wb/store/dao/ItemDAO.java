@@ -1,4 +1,4 @@
-package wb.store.helper;
+package wb.store.dao;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -16,6 +16,22 @@ public class ItemDAO {
 	
 	public ItemDAO(Connection myConn){
 		this.myConn = myConn;
+	}
+	
+	public Serializable getItem(Integer id) throws SQLException{
+		String sql = "select item_name, item_description, item_price from items where item_id = " + id;
+		
+		try (Statement myStmt = myConn.createStatement();
+				ResultSet myRS = myStmt.executeQuery(sql)){
+			if(myRS.next()){
+				Item item = new Item(myRS.getInt("item_id"),
+						myRS.getString("item_name"), 
+						myRS.getString("item_description"),
+						Float.valueOf(myRS.getString("item_price")));
+				return item;
+			}
+		}
+		return null;
 	}
 	
 	public Serializable addItem(Item item) throws SQLException{

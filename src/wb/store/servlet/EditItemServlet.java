@@ -2,7 +2,6 @@ package wb.store.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -15,22 +14,24 @@ import javax.sql.DataSource;
 import wb.store.model.Item;
 import wb.store.service.ItemService;
 
-public class DisplayItemsServlet extends HttpServlet {
+public class EditItemServlet extends HttpServlet{
 
 	@Resource(name="jdbc/store")
 	private DataSource ds;
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response) 
-				throws ServletException, IOException {
-		try {
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Integer id = Integer.parseInt(request.getParameter("item_id"));
+		
+		try{
 			ItemService is = new ItemService(ds);
-			List<Item> items = is.getItems();
-			request.setAttribute("items", items);
-			RequestDispatcher view = request.getRequestDispatcher("itemDisplay.jsp");
+			Item item = (Item)is.getItem(id);
+			request.setAttribute("item", item);
+			RequestDispatcher view = request.getRequestDispatcher("editForm.jsp");
 			view.forward(request, response);
-		} catch (SQLException sqle){
+			
+		} catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		
 	}
 }

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import wb.store.helper.ItemService;
 import wb.store.model.Item;
+import wb.store.service.ItemService;
 
 public class AddItemServlet extends HttpServlet{
 

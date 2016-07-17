@@ -18,6 +18,7 @@ while(it.hasNext()) {
 <%= item.getName() %><br/>
 <%= item.getDescription() %><br/>
 <%= item.getPrice() %><br/>
+
 <br/>
 
 <% } %>

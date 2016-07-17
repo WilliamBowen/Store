@@ -1,4 +1,4 @@
-package wb.store.helper;
+package wb.store.service;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import wb.store.dao.ItemDAO;
 import wb.store.model.Item;
 
 public class ItemService {
@@ -16,6 +17,14 @@ public class ItemService {
 		this.ds = ds;
 
 	}
+	
+	public Serializable getItem(Integer id) throws SQLException{
+		try(Connection conn = ds.getConnection();){
+			ItemDAO dao = new ItemDAO(conn);
+			return dao.getItem(id);
+		}
+	}
+	
 	public Serializable addItem(Item item) throws SQLException{
 		
 		try(Connection conn = ds.getConnection();){

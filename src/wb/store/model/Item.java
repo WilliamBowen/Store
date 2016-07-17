@@ -14,7 +14,7 @@ public class Item implements Serializable{
 		this.setName(name);
 		this.setDescription(description);
 		this.setPrice(price);
-	}
+	}	
 	
 	public Item(Integer id, String name, String description, float price){
 		this.setId(id);

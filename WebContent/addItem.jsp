@@ -13,6 +13,6 @@
 <% } else {%>
 	Something went wrong!
 <% } %>
-<a href="display">Click here to see all items in the database</a>
+<br/><a href="display">Click here to see all items in the database</a>
 </body>
 </html>
