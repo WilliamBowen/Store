@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import wb.store.model.Item;
 import wb.store.service.ItemService;
 
-public class EditItemServlet extends HttpServlet{
+public class DeleteItemServlet extends HttpServlet{
 
 	@Resource(name="jdbc/store")
 	private DataSource ds;
@@ -27,8 +27,8 @@ public class EditItemServlet extends HttpServlet{
 			ItemService is = new ItemService(ds);
 			Item item = (Item)is.getItem(id);
 			request.setAttribute("item", item);
-			request.setAttribute("action", "editItem");
-			RequestDispatcher view = request.getRequestDispatcher("admin.jsp");
+			request.setAttribute("action", "deleteItem");
+			RequestDispatcher view = request.getRequestDispatcher("confirm_delete.jsp");
 			view.forward(request, response);
 			
 		} catch(SQLException sqle) {
@@ -48,8 +48,8 @@ public class EditItemServlet extends HttpServlet{
 		Item item = new Item(id, name, description, price);
 		try{
 			ItemService is = new ItemService(ds);
-			int updated = (int) is.updateItem(item);	
-			request.setAttribute("update", updated);
+			int deleted = (int) is.deleteItem(item);	
+			request.setAttribute("delete", deleted);
 			RequestDispatcher view = request.getRequestDispatcher("ItemOutput.jsp");
 			view.forward(request, response);
 				

@@ -10,7 +10,12 @@
 <body>
 <% if (request.getAttribute("id") != null) {%>
 	Item was added to database.
-<% } else {%>
+<% } else  if(request.getAttribute("update") != null){%>
+	Items updated in the database: <%=(int)request.getAttribute("update") %><br/>
+<% } else  if(request.getAttribute("delete") != null){%>
+	Items deleted from the database: <%=(int)request.getAttribute("delete") %><br/>
+
+<% } else { %>
 	Something went wrong!
 <% } %>
 <br/><a href="display">Click here to see all items in the database</a>

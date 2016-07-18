@@ -18,6 +18,16 @@ while(it.hasNext()) {
 <%= item.getName() %><br/>
 <%= item.getDescription() %><br/>
 <%= item.getPrice() %><br/>
+<form action="editItem" method="GET">
+	<input type="hidden" name="action" value="getItem">
+	<input type="hidden" name="item_id" value="<%= item.getId() %>">
+	<input type="submit" value="Edit">
+</form>
+<form action="deleteItem" method="GET">
+	<input type="hidden" name="action" value="getItem">
+	<input type="hidden" name="item_id" value="<%= item.getId() %>">
+	<input type="submit" value="Delete">
+</form>
 
 <br/>
 

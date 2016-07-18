@@ -19,8 +19,8 @@ public class ItemDAO {
 	}
 	
 	public Serializable getItem(Integer id) throws SQLException{
-		String sql = "select item_name, item_description, item_price from items where item_id = " + id;
-		
+		String sql = "select item_id, item_name, item_description, item_price from items where item_id = " + id;
+		System.out.println(sql);
 		try (Statement myStmt = myConn.createStatement();
 				ResultSet myRS = myStmt.executeQuery(sql)){
 			if(myRS.next()){
@@ -32,6 +32,29 @@ public class ItemDAO {
 			}
 		}
 		return null;
+	}
+	
+	public Serializable editItem(Item item) throws SQLException{
+		String sql = "update items set item_name=?, item_description=?, item_price=?"
+				+ " where item_id = ?";
+		try(PreparedStatement myStmt = myConn.prepareStatement(sql)){
+			myStmt.setString(1, item.getName());
+			myStmt.setString(2, item.getDescription());
+			myStmt.setFloat(3, item.getPrice());
+			myStmt.setLong(4, item.getId());
+			
+			return myStmt.executeUpdate();
+		}
+	}
+	
+	public Serializable deleteItem(Item item) throws SQLException{
+		String sql = "delete from items where item_id = ?";
+		try(PreparedStatement myStmt = myConn.prepareStatement(sql)){
+			
+			myStmt.setLong(1, item.getId());
+			
+			return myStmt.executeUpdate();
+		}
 	}
 	
 	public Serializable addItem(Item item) throws SQLException{
@@ -66,7 +89,8 @@ public class ItemDAO {
 
 			//process the result set
 			while (myRS.next()) {
-				Item item = new Item(myRS.getString("item_name"), 
+				Item item = new Item(myRS.getInt("item_id"),
+									myRS.getString("item_name"), 
 									myRS.getString("item_description"),
 									Float.valueOf(myRS.getString("item_price")));
 				items.add(item);

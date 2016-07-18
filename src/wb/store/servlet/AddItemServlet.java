@@ -23,6 +23,13 @@ public class AddItemServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//check if id already exists
+		if(request.getParameter("action") == "update"){
+			//redirect to edit servlet
+			RequestDispatcher rd = request.getRequestDispatcher("edit");
+			rd.forward(request, response);
+		}
+		
 		//retrieve parameters from the request
 		String name = request.getParameter("item_name");
 		String description = request.getParameter("item_description");
@@ -33,7 +40,7 @@ public class AddItemServlet extends HttpServlet{
 			ItemService is = new ItemService(ds);
 			Long id = (Long)is.addItem(item);
 			request.setAttribute("id", id);
-			RequestDispatcher view = request.getRequestDispatcher("addItem.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("ItemOutput.jsp");
 			view.forward(request, response);
 			
 		} catch(SQLException sqle) {

@@ -18,6 +18,20 @@ public class ItemService {
 
 	}
 	
+	public Serializable deleteItem(Item item) throws SQLException{
+		try(Connection conn = ds.getConnection();){
+			ItemDAO dao = new ItemDAO(conn);
+			return dao.deleteItem(item);
+		}
+	}
+	
+	public Serializable updateItem(Item item) throws SQLException{
+		try(Connection conn = ds.getConnection();){
+			ItemDAO dao = new ItemDAO(conn);
+			return dao.editItem(item);
+		}
+	}
+	
 	public Serializable getItem(Integer id) throws SQLException{
 		try(Connection conn = ds.getConnection();){
 			ItemDAO dao = new ItemDAO(conn);
