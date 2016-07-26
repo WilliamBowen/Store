@@ -7,8 +7,9 @@
  
 <body>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <p>Shopping Cart</p>
-<p><a href="/ItemList.jsp">Item List</a> </p>
+<p><a href="shop">Item List</a> </p>
 <table width="75%" border="1">
   <tr >
     <td>Item Description</td>
@@ -25,21 +26,21 @@
   <c:forEach var="cartItem" items="${cart.cartItems}" varStatus="counter">
   <form name="item" method="POST" action="servlet/CartController">
   <tr>
-    <td><c:out value="${cartItem.ItemId}"/><br/>
+    <td><c:out value="${cartItem.itemName}"/><br/>
       <c:out value="${cartItem.itemDescription}"/></td>
     <td><input type='hidden' name='itemIndex' value='<c:out value="${counter.count}"/>'>
     <input type='text' name="quantity" value='<c:out value="${cartItem.quantity}"/>' size='2'> 
     <input type="submit" name="action" value="Update">
  <br/>         <input type="submit" name="action" value="Delete"></td>
-    <td>$<c:out value="${cartItem.itemCost}"/></td>
-    <td>$<c:out value="${cartItem.totalCost}"/></td>
+    <td>$<fmt:formatNumber type="number" maxFractionDigits="2" value="${cartItem.itemPrice}"/></td>
+    <td>$<fmt:formatNumber type="number" maxFractionDigits="2" value="${cartItem.totalCost}"/></td>
   </tr>
   </form>
   </c:forEach>
   <tr>
     <td colspan="2"> </td>
     <td> </td>
-    <td>Subtotal: $<c:out value="${cart.orderTotal}"/></td>
+    <td>Subtotal: $<fmt:formatNumber type="number" maxFractionDigits="2" value="${cart.orderTotal}"/></td>
   </tr>
 </table>
 </body>

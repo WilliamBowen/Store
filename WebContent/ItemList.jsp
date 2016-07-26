@@ -1,3 +1,5 @@
+<%@ page import="java.util.*, wb.store.model.Item" language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -8,26 +10,29 @@
 <body>
 <p>Item List</p>
 <a href="ShoppingCart.jsp">View Cart</a>
-<p/>    
+<p/>
 <table width="75%" border="1">
+<% 
+ArrayList al = (ArrayList)request.getAttribute("items");
+Iterator it = al.iterator();
+
+while(it.hasNext()) {
+  Item item = (Item)it.next();
+%>
   <tr>
     <td><form  method="POST" action="servlet/CartController">
- <input type="hidden" name="modelNo" value="TF-MODEL1">
-      <p>Description: Tech-Freaks imaginary model 1. <input type="hidden" name="description" value="Tech-Freaks imaginary model 1."></p>
+   	  <input type="hidden" name="itemId" value="<%= item.getId() %>">	
+ 	  <p> Name: <%= item.getName() %><input type="hidden" name="name" value="<%= item.getName() %>"></p>
+      <p>Description:  <%= item.getDescription() %> <input type="hidden" name="description" value="<%= item.getDescription() %>"></p>
       <p>Quantity:<input type="text" size="2" value="1" name="quantity"></p>
-      <p>Price: $10.00<input type="hidden" name="price" value="10"></p><input type="hidden" name="action" value="add"><input type="submit" name="addToCart" value="Add To Cart">
+      <p>Price: <%= item.getPrice() %><input type="hidden" name="price" value="<%= item.getPrice() %>"></p>
+      <input type="hidden" name="action" value="add">
+      <input type="submit" name="addToCart" value="Add To Cart">
       </form></td>
   </tr>
-  <tr>
-    <td><form name="modelDetail3" method="POST" action="servlet/CartController"><p>Model: TF-Model3<input type="hidden" name="modelNo" value="TF-MODEL3"></p>
-      <p>Description: Tech-Freaks imaginary model 3.<input type="hidden" name="description" value="Tech-Freaks imaginary model 3."></p>
-      <p>Quantity:<input type="text" size="2" value="1" name="quantity"></p>
-      <p>Price: $30.00<input type="hidden" name="price" value="30"></p>        
-      <input type="hidden" name="action" value="add">
-        <input type="submit" name="addToCart" value="Add To Cart">
-</form></td>
-  </tr>
+  <% } %> 
 </table>
+
 <p> </p>
 </body>
 </html>

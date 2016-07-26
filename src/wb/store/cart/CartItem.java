@@ -2,15 +2,23 @@ package wb.store.cart;
 
 public class CartItem {
 	private Integer itemId;
+	private String itemName;
 	private String itemDescription;
 	private double itemPrice;
 	private int quantity;
 	private double totalCost;
+	
 	public Integer getItemId() {
 		return itemId;
 	}
 	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 	public String getItemDescription() {
 		return itemDescription;

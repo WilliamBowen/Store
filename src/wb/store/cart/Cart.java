@@ -46,7 +46,7 @@ public class Cart {
 	   
 	 }
 	  
-	 public void addCartItem(Integer itemId, String itemDescription,
+	 public void addCartItem(Integer itemId, String itemName, String itemDescription,
 	String strUnitCost, String strQuantity) {
 	  double totalCost = 0.0;
 	  double itemPrice = 0.0;
@@ -58,6 +58,7 @@ public class Cart {
 	   if(quantity>0) {
 	    totalCost = itemPrice*quantity;
 	    cartItem.setItemId(itemId);
+	    cartItem.setItemName(itemName);
 	    cartItem.setItemDescription(itemDescription);
 	    cartItem.setItemPrice(itemPrice);
 	    cartItem.setQuantity(quantity);
